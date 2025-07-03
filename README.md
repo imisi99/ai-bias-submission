@@ -2,9 +2,47 @@
 
 ## Project Overview
 
-This project was developed for the AI Bias Hackathon to investigate, test, detect and report algorithimic bias and fairness in a loan approval model. Using SHAP, fairness metrics and visualization techniques, we evaluated potential bias and discrimination in the dataset with a focus on sensitive attributes like gender and race.
+This project was developed for the AI Bias Hackathon to investigate, test, detect and report algorithimic bias and fairness in a loan approval model. Using SHAP, Fairness Metrics and Visualization Techniques, We evaluated potential bias and discrimination in the dataset with a focus on sensitive attributes like gender and race.
 
-## Methodology
+## Problem Statement
+
+The financial sector has long faced scrutiny over systemic inequities embedded in its decision-making processes, particularly in loan approvals. This project explores the simulation of the real world in detection and explantation of unusual patterns in AI decision making for mortage loan approvals using the provided dataset.
+
+## Project structure
+
+```
+├── LICENSE
+├── README.md                      # Project Documentation
+├── bias_visualization.png         # Bias visualization
+├── confusion_matrix.png           # Confusion matrix visualization
+├── datasets                       # Datasets
+│   ├── loan_access_dataset.csv
+│   ├── loan_access_dataset.xlsx
+│   └── test.csv
+├── feature_importance.png         # Feature importance visualization
+├── loan_model.ipynb               # Jupiter notebook
+├── loan_model.py                  # Model trainining and bias analysis script
+├── requirements.txt               # Dependency list
+├── shap_summary.png               # SHAP value summary plot
+└── submission.csv                 # Final Output files
+
+```
+
+## Dataset
+
+- **loan_access_dataset.csv:** Labeled training data
+- **test.csv:** Unlabeled data for model predictions.
+
+Sensitve attributes audited:
+
+- Gender
+- Race
+- Age
+- Employment Status
+- Education
+- Zip Code Group
+
+## Methodology and Approach
 
 - **Data Loading and Prepocessing**
 
@@ -13,44 +51,51 @@ This project was developed for the AI Bias Hackathon to investigate, test, detec
 
 - **Model Training**
 
-  - Used Random Forest Classifier to predict loan approval
+  - **XGBoost Classifier:** choosen for its balance in performance and interpretability
+  - Key parameters: `max_depth`, `learning_rate`, `n_estimators`
 
 - **Bias Detection**
 
   - Conducted SHAP value analytics for feature importance and potential discriminatory attributes.
-  - Conducted fairness metrics
+  - Group wise approval rate analysis
 
-- **Bias Visualization**
-
-  - Generated SHAP summary plots and group-based fairness visualizations.
+- **Visual Analysis**
+  - Generated visual evidence of bias:
+    - Feature importance
+    - Confusion matrix analysis
+    - SHAP summary plots
+    - Bias visualization
 
 ## Key Findings
 
-- **Disparity in Approval Rates**:
-  sensitive groups showed unequal approval rates, indicating potential bias.
+- **Gender Bias:**
+  Male applicants had ~15% higher approval rates
 
-- **SHAP Interpretability**:
-  SHAP plots highlighted "gender" and marital status as influencing factors, which require further ethical evaluation.
+- **Racial Bias:**
+  Notable disparity in approval rate between different racial groups
 
-- **Fairness Metric**: Certain subgroups exhibited bias accorsing to standard fairness metrics
+- **Geographic Bias:** Zip code disparities indicate location-based bias
 
-### Visuals
+- **Education disparity:** Lower approval rates for less educated applicants
 
-- BIAS VISUALIZATION
+## Visuals
+
+- ### APPROVAL RATE COMPARISONS ACROSS DEMOGRAPHICS GROUPS
+
   ![Bias Visualization](bias_visualization.png)
 
-- SHAP SUMMARY
+  ### SHAP SUMMARY PLOTS
+
   ![Bias Visualization](shap_summary.png)
 
-- CONFUSION MATRIX
+- ### CONFUSION MATRIX ANALYSIS
+
   ![Confusion Matrix](confusion_matrix.png)
 
-- FEATURE IMPORTANCE
+- ### FEATURE IMPORTANCES
   ![Feature Importance](feature_importance.png)
 
-## Getting Started
-
-### Prerequisites
+## Tools and Libraries
 
 Before you begin, ensure you have met the following requirements:
 
@@ -60,8 +105,9 @@ Before you begin, ensure you have met the following requirements:
 - SHAP
 - Matplotib
 - Seaborn
+- XGBoost
 
-### Installation
+## Running the project
 
 1. Clone the Repository
 
@@ -89,22 +135,6 @@ pip install -r requirements.txt
 python loan_model.py
 ```
 
-## Project structure
+---
 
-```
-├── LICENSE
-├── README.md                      # Project Documentation
-├── bias_visualization.png         # Bias visualization
-├── confusion_matrix.png          # Confusion matrix visualization
-├── datasets                                 # Datasets
-│   ├── loan_access_dataset.csv
-│   ├── loan_access_dataset.xlsx
-│   └── test.csv
-├── feature_importance.png        # Feature importance visualization
-├── loan_model.ipynb                 # Jupiter notebook
-├── loan_model.py                      # Model trainining and bias analysis script
-├── requirements.txt                   # Dependency list
-├── shap_summary.png              # SHAP value summary plot
-└── submission.csv                     # Final Output files
-
-```
+_This project was built as part of the AI Bias Bounty Hackathon._
